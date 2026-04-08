@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форматирование флешки | Linux для людей</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container nav-container">
+                <a href="index.html" class="logo">Linux для людей</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="download.html">Скачать</a></li>
+                    <li><a href="format.html">Форматирование флешки</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Как записать образ на флешку</h1>
+            <div class="format-section">
+                <h2>Важно!</h2>
+                <div class="warning">
+                    <p>⚠️ Все данные на флешке будут удалены. Перед началом скопируйте важные файлы в другое место.</p>
+                </div>
+
+                <h2>Windows</h2>
+                <h3>Способ 1: Rufus</h3>
+                <ol>
+                    <li>Скачайте и запустите <a href="https://rufus.ie/ru/" target="_blank">Rufus</a>.</li>
+                    <li>Вставьте флешку, выберите её в поле «Устройство».</li>
+                    <li>Нажмите «ВЫБРАТЬ» и укажите скачанный ISO-файл.</li>
+                    <li>Остальные параметры оставьте по умолчанию, нажмите «СТАРТ».</li>
+                    <li>Дождитесь завершения записи.</li>
+                </ol>
+
+                <h3>Способ 2: BalenaEtcher</h3>
+                <ol>
+                    <li>Скачайте <a href="https://www.balena.io/etcher/" target="_blank">BalenaEtcher</a> и установите.</li>
+                    <li>Выберите ISO-файл, выберите флешку, нажмите «Flash!».</li>
+                </ol>
+
+                <h2>Linux</h2>
+                <h3>Графический способ (рекомендуется)</h3>
+                <ol>
+                    <li>Откройте Меню</li>
+                    <li>В строке поиска напишите "Запись образа на USB-накопитель"</li>
+                    <li>Запустите приложение</li>
+                    <li>В поле ISO-образ выберите ранее скачанный файл</li>
+                    <li>В поле USB-накопитель выберите свою флешку</li>
+		    <li>Нажмите "Записать"</li>
+                </ol>
+
+                <h3>Командная строка (dd)</h3>
+                <p>Откройте терминал и выполните:</p>
+                <pre><code>sudo dd if=/путь/к/образу.iso of=/dev/sdX bs=4M status=progress && sync</code></pre>
+                <p>Замените <code>/dev/sdX</code> на вашу флешку (например, <code>/dev/sdb</code>). Будьте внимательны: не ошибитесь с устройством!</p>
+
+                <h2>macOS</h2>
+                <h3>BalenaEtcher</h3>
+                <p>Скачайте версию для macOS, запустите и выберите ISO и флешку.</p>
+
+                <h3>Командная строка (dd)</h3>
+                <p>Сначала определите диск флешки: <code>diskutil list</code>. Затем размонтируйте: <code>diskutil unmountDisk /dev/diskX</code>. Запишите:</p>
+                <pre><code>sudo dd if=/путь/к/образу.iso of=/dev/rdiskX bs=1m</code></pre>
+                <p>Используйте <code>rdiskX</code> для ускорения. После завершения выполните <code>diskutil eject /dev/diskX</code>.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Linux для людей. Сделано с ❤️ для друзей.</p>
+        </div>
+    </footer>
+</body>
+</html>
