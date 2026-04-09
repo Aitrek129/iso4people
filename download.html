@@ -23,8 +23,89 @@
     <main>
         <div class="container">
             <h1>Доступные сборки</h1>
-            <div id="iso-list" class="iso-grid">
-                <p>Загрузка списка...</p>
+            <div class="iso-grid">
+                <!-- ========== ОФИЦИАЛЬНЫЕ ДИСТРИБУТИВЫ ========== -->
+                
+                <!-- Карточка Ubuntu -->
+                <div class="iso-card">
+                    <h3>Ubuntu 22.04 LTS</h3>
+                    <div class="meta">
+                        <span class="badge official">Официальный</span>
+                        <span>📦 4.8 GB</span>
+                        <span>📅 2023-08-10</span>
+                    </div>
+                    <div class="description">Популярный дистрибутив для новичков и профессионалов. Стабильный, с большим сообществом.</div>
+                    <!-- ЗАМЕНИТЕ ССЫЛКУ НА АКТУАЛЬНУЮ -->
+                    <a href="https://releases.ubuntu.com/22.04/ubuntu-22.04.3-desktop-amd64.iso" class="download-link" target="_blank" rel="noopener noreferrer">Скачать с сайта</a>
+                </div>
+                
+                <!-- Карточка Fedora -->
+                <div class="iso-card">
+                    <h3>Fedora Workstation 38</h3>
+                    <div class="meta">
+                        <span class="badge official">Официальный</span>
+                        <span>📦 2.1 GB</span>
+                        <span>📅 2023-04-18</span>
+                    </div>
+                    <div class="description">Современный дистрибутив с новейшим ПО. Подходит для разработки.</div>
+                    <!-- ЗАМЕНИТЕ ССЫЛКУ НА АКТУАЛЬНУЮ -->
+                    <a href="https://download.fedoraproject.org/pub/fedora/linux/releases/38/Workstation/x86_64/iso/Fedora-Workstation-Live-x86_64-38-1.6.iso" class="download-link" target="_blank" rel="noopener noreferrer">Скачать с сайта</a>
+                </div>
+                
+                <!-- Карточка Linux Mint -->
+                <div class="iso-card">
+                    <h3>Linux Mint 21.2</h3>
+                    <div class="meta">
+                        <span class="badge official">Официальный</span>
+                        <span>📦 2.8 GB</span>
+                        <span>📅 2023-07-15</span>
+                    </div>
+                    <div class="description">Дружелюбный дистрибутив на базе Ubuntu. Идеален для перехода с Windows.</div>
+                    <!-- ЗАМЕНИТЕ ССЫЛКУ НА АКТУАЛЬНУЮ -->
+                    <a href="https://mirrors.kernel.org/linuxmint/stable/21.2/linuxmint-21.2-cinnamon-64bit.iso" class="download-link" target="_blank" rel="noopener noreferrer">Скачать с сайта</a>
+                </div>
+
+                <!-- ========== КАСТОМНЫЕ СБОРКИ (ВАШИ ISO) ========== -->
+                
+                <!-- Кастомная сборка для разработки -->
+                <div class="iso-card">
+                    <h3>MyLinux v1.0 для разработки</h3>
+                    <div class="meta">
+                        <span class="badge custom">Кастомный</span>
+                        <span>📦 2.3 GB</span>
+                        <span>📅 2025-03-15</span>
+                    </div>
+                    <div class="description">Кастомная сборка для веб-разработки с предустановленными инструментами (VS Code, Docker, Node.js, Python).</div>
+                    <!-- ПОЛОЖИТЕ ФАЙЛ mylinux-dev-1.0.iso В ПАПКУ /iso/ И УКАЖИТЕ ПРАВИЛЬНЫЙ ПУТЬ -->
+                    <a href="iso/mylinux-dev-1.0.iso" class="download-link" download>Скачать ISO</a>
+                </div>
+                
+                <!-- Кастомная сборка для игр -->
+                <div class="iso-card">
+                    <h3>MyLinux v1.0 для игр</h3>
+                    <div class="meta">
+                        <span class="badge custom">Кастомный</span>
+                        <span>📦 3.1 GB</span>
+                        <span>📅 2025-03-10</span>
+                    </div>
+                    <div class="description">Оптимизированная сборка для игр с драйверами NVIDIA, Steam, Lutris и Wine.</div>
+                    <!-- ПОЛОЖИТЕ ФАЙЛ mylinux-gaming-1.0.iso В ПАПКУ /iso/ И УКАЖИТЕ ПРАВИЛЬНЫЙ ПУТЬ -->
+                    <a href="iso/mylinux-gaming-1.0.iso" class="download-link" download>Скачать ISO</a>
+                </div>
+
+                <!-- ========== ДОБАВЛЯЙТЕ НОВЫЕ КАРТОЧКИ ПО ЭТОМУ ШАБЛОНУ ========== -->
+                <!-- 
+                <div class="iso-card">
+                    <h3>Название сборки</h3>
+                    <div class="meta">
+                        <span class="badge official">Официальный</span>   или   <span class="badge custom">Кастомный</span>
+                        <span>📦 Размер</span>
+                        <span>📅 Дата</span>
+                    </div>
+                    <div class="description">Краткое описание.</div>
+                    <a href="ссылка_на_ISO_или_путь_к_файлу" class="download-link" ...>Текст кнопки</a>
+                </div>
+                -->
             </div>
         </div>
     </main>
@@ -34,73 +115,5 @@
             <p>© 2025 Linux для людей. Сделано с ❤️ для друзей.</p>
         </div>
     </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const container = document.getElementById('iso-list');
-            if (!container) return;
-
-            fetch('iso.json')
-                .then(response => {
-                    if (!response.ok) throw new Error('Не удалось загрузить список');
-                    return response.json();
-                })
-                .then(items => {
-                    if (items.length === 0) {
-                        container.innerHTML = '<p>Пока нет доступных сборок. Загляните позже!</p>';
-                        return;
-                    }
-
-                    container.innerHTML = '';
-                    items.forEach(item => {
-                        const card = document.createElement('div');
-                        card.className = 'iso-card';
-
-                        // Определяем тип и формируем ссылку
-                        let linkHtml = '';
-                        if (item.type === 'official') {
-                            linkHtml = `<a href="${escapeHtml(item.url)}" class="download-link" target="_blank" rel="noopener noreferrer">Скачать с сайта</a>`;
-                        } else {
-                            linkHtml = `<a href="iso/${encodeURIComponent(item.filename)}" class="download-link" download>Скачать ISO</a>`;
-                        }
-
-                        // Бейдж типа
-                        const typeBadge = item.type === 'official' 
-                            ? '<span class="badge official">Официальный</span>' 
-                            : '<span class="badge custom">Кастомный</span>';
-
-                        // Размер и дата (если есть)
-                        const metaInfo = item.size ? `<span>📦 ${escapeHtml(item.size)}</span>` : '';
-                        const dateInfo = item.date ? `<span>📅 ${escapeHtml(item.date)}</span>` : '';
-
-                        card.innerHTML = `
-                            <h3>${escapeHtml(item.name)}</h3>
-                            <div class="meta">
-                                ${typeBadge}
-                                ${metaInfo ? `| ${metaInfo}` : ''}
-                                ${dateInfo ? `| ${dateInfo}` : ''}
-                            </div>
-                            <div class="description">${escapeHtml(item.description)}</div>
-                            ${linkHtml}
-                        `;
-                        container.appendChild(card);
-                    });
-                })
-                .catch(error => {
-                    console.error('Ошибка загрузки:', error);
-                    container.innerHTML = '<p>Ошибка загрузки списка. Попробуйте обновить страницу позже.</p>';
-                });
-        });
-
-        function escapeHtml(str) {
-            if (!str) return '';
-            return str.replace(/[&<>]/g, function(m) {
-                if (m === '&') return '&amp;';
-                if (m === '<') return '&lt;';
-                if (m === '>') return '&gt;';
-                return m;
-            });
-        }
-    </script>
 </body>
 </html>
