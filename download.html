@@ -35,6 +35,72 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('iso-list');
+            if (!container) return;
+
+            fetch('iso.json')
+                .then(response => {
+                    if (!response.ok) throw new Error('Не удалось загрузить список');
+                    return response.json();
+                })
+                .then(items => {
+                    if (items.length === 0) {
+                        container.innerHTML = '<p>Пока нет доступных сборок. Загляните позже!</p>';
+                        return;
+                    }
+
+                    container.innerHTML = '';
+                    items.forEach(item => {
+                        const card = document.createElement('div');
+                        card.className = 'iso-card';
+
+                        // Определяем тип и формируем ссылку
+                        let linkHtml = '';
+                        if (item.type === 'official') {
+                            linkHtml = `<a href="${escapeHtml(item.url)}" class="download-link" target="_blank" rel="noopener noreferrer">Скачать с сайта</a>`;
+                        } else {
+                            linkHtml = `<a href="iso/${encodeURIComponent(item.filename)}" class="download-link" download>Скачать ISO</a>`;
+                        }
+
+                        // Бейдж типа
+                        const typeBadge = item.type === 'official' 
+                            ? '<span class="badge official">Официальный</span>' 
+                            : '<span class="badge custom">Кастомный</span>';
+
+                        // Размер и дата (если есть)
+                        const metaInfo = item.size ? `<span>📦 ${escapeHtml(item.size)}</span>` : '';
+                        const dateInfo = item.date ? `<span>📅 ${escapeHtml(item.date)}</span>` : '';
+
+                        card.innerHTML = `
+                            <h3>${escapeHtml(item.name)}</h3>
+                            <div class="meta">
+                                ${typeBadge}
+                                ${metaInfo ? `| ${metaInfo}` : ''}
+                                ${dateInfo ? `| ${dateInfo}` : ''}
+                            </div>
+                            <div class="description">${escapeHtml(item.description)}</div>
+                            ${linkHtml}
+                        `;
+                        container.appendChild(card);
+                    });
+                })
+                .catch(error => {
+                    console.error('Ошибка загрузки:', error);
+                    container.innerHTML = '<p>Ошибка загрузки списка. Попробуйте обновить страницу позже.</p>';
+                });
+        });
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
+    </script>
 </body>
 </html>
