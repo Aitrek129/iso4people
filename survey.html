@@ -5,6 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Опрос | Linux для людей</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Дополнительные стили для iframe */
+        .google-form-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+        }
+        .google-form-container iframe {
+            width: 100%;
+            height: 800px;
+            border: none;
+            background: transparent;
+        }
+        @media (max-width: 768px) {
+            .google-form-container iframe {
+                height: 1000px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -15,7 +37,7 @@
                     <li><a href="index.html">Главная</a></li>
                     <li><a href="download.html">Скачать</a></li>
                     <li><a href="format.html">Форматирование флешки</a></li>
-                    <li><a href="survey.html" class="active">Опрос</a></li>
+                    <li><a href="survey.html">Опрос</a></li>
                     <li><button id="theme-switch" class="theme-toggle">🌙 Тёмная</button></li>
                 </ul>
             </div>
@@ -27,68 +49,16 @@
             <h1>Опрос</h1>
             <p class="survey-intro">Помогите сделать проект лучше. Ваше мнение очень важно!</p>
 
-            <form id="survey-form" class="survey-form" action="save_survey.php" method="POST">
-                <!-- Вопрос 1: Имя и фамилия -->
-                <div class="form-group">
-                    <label for="fullname">Ваши имя и фамилия <span class="required">*</span></label>
-                    <input type="text" id="fullname" name="fullname" required placeholder="Иван Иванов">
-                </div>
+            <!-- Контейнер для Google Form -->
+            <div class="google-form-container">
+                <!-- ЗАМЕНИТЕ src="..." НА ВАШ КОД ВСТАВКИ ИЗ GOOGLE FORMS -->
+                <iframe src="https://docs.google.com/forms/d/e/ВАШ_ИДЕНТИФИКАТОР/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Загрузка…</iframe>
+            </div>
 
-                <!-- Вопрос 2: Оформление сайта -->
-                <div class="form-group">
-                    <label>Вам нравится оформление сайта? <span class="required">*</span></label>
-                    <div class="radio-group">
-                        <label><input type="radio" name="design" value="Да, очень нравится" required> Да, очень нравится</label>
-                        <label><input type="radio" name="design" value="Скорее да, чем нет"> Скорее да, чем нет</label>
-                        <label><input type="radio" name="design" value="Нейтрально"> Нейтрально</label>
-                        <label><input type="radio" name="design" value="Скорее нет, чем да"> Скорее нет, чем да</label>
-                        <label><input type="radio" name="design" value="Нет, не нравится"> Нет, не нравится</label>
-                    </div>
-                </div>
-
-                <!-- Вопрос 3: Удобство использования -->
-                <div class="form-group">
-                    <label>Удобно ли им пользоваться? <span class="required">*</span></label>
-                    <div class="radio-group">
-                        <label><input type="radio" name="usability" value="Очень удобно" required> Очень удобно</label>
-                        <label><input type="radio" name="usability" value="Удобно"> Удобно</label>
-                        <label><input type="radio" name="usability" value="Средне"> Средне</label>
-                        <label><input type="radio" name="usability" value="Не очень удобно"> Не очень удобно</label>
-                        <label><input type="radio" name="usability" value="Совсем неудобно"> Совсем неудобно</label>
-                    </div>
-                </div>
-
-                <!-- Вопрос 4: Скачивание ISO -->
-                <div class="form-group">
-                    <label>Скачивали ли вы ISO с этого сайта? <span class="required">*</span></label>
-                    <div class="radio-group">
-                        <label><input type="radio" name="downloaded" value="Да, скачивал(а)" required> Да, скачивал(а)</label>
-                        <label><input type="radio" name="downloaded" value="Нет, но планирую"> Нет, но планирую</label>
-                        <label><input type="radio" name="downloaded" value="Нет, не планирую"> Нет, не планирую</label>
-                        <label><input type="radio" name="downloaded" value="Пока не решил(а)"> Пока не решил(а)</label>
-                    </div>
-                </div>
-
-                <!-- Вопрос 5: Общая оценка проекта -->
-                <div class="form-group">
-                    <label>Нравится сам проект? <span class="required">*</span></label>
-                    <div class="radio-group">
-                        <label><input type="radio" name="project" value="Очень нравится" required> Очень нравится</label>
-                        <label><input type="radio" name="project" value="Нравится"> Нравится</label>
-                        <label><input type="radio" name="project" value="Нейтрально"> Нейтрально</label>
-                        <label><input type="radio" name="project" value="Не нравится"> Не нравится</label>
-                        <label><input type="radio" name="project" value="Совсем не нравится"> Совсем не нравится</label>
-                    </div>
-                </div>
-
-                <!-- Дополнительные комментарии -->
-                <div class="form-group">
-                    <label for="comments">Комментарии и пожелания</label>
-                    <textarea id="comments" name="comments" rows="4" placeholder="Напишите, что можно улучшить или добавить..."></textarea>
-                </div>
-
-                <button type="submit" class="btn">Отправить ответы</button>
-            </form>
+            <!-- Альтернативная ссылка (если iframe не грузится) -->
+            <div class="export-section">
+                <p>Если форма не отображается, <a href="https://docs.google.com/forms/d/e/ВАШ_ИДЕНТИФИКАТОР/viewform" target="_blank" rel="noopener noreferrer">откройте её в новой вкладке</a>.</p>
+            </div>
         </div>
     </main>
 
