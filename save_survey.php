@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 } else {
     // Если кто-то зашёл напрямую на PHP-файл
-    header('Location: survey.html');
-    exit;
+#    header('Location: survey.html');
+#    exit;
 }
 ?>
