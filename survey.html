@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Опрос | Linux для людей</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container nav-container">
+                <a href="index.html" class="logo">Linux для людей</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="download.html">Скачать</a></li>
+                    <li><a href="format.html">Форматирование флешки</a></li>
+                    <li><a href="survey.html" class="active">Опрос</a></li>
+                    <li><button id="theme-switch" class="theme-toggle">🌙 Тёмная</button></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Опрос</h1>
+            <p class="survey-intro">Помогите сделать проект лучше. Ваше мнение очень важно!</p>
+
+            <form id="survey-form" class="survey-form" action="save_survey.php" method="POST">
+                <!-- Вопрос 1: Имя и фамилия -->
+                <div class="form-group">
+                    <label for="fullname">Ваши имя и фамилия <span class="required">*</span></label>
+                    <input type="text" id="fullname" name="fullname" required placeholder="Иван Иванов">
+                </div>
+
+                <!-- Вопрос 2: Оформление сайта -->
+                <div class="form-group">
+                    <label>Вам нравится оформление сайта? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="design" value="Да, очень нравится" required> Да, очень нравится</label>
+                        <label><input type="radio" name="design" value="Скорее да, чем нет"> Скорее да, чем нет</label>
+                        <label><input type="radio" name="design" value="Нейтрально"> Нейтрально</label>
+                        <label><input type="radio" name="design" value="Скорее нет, чем да"> Скорее нет, чем да</label>
+                        <label><input type="radio" name="design" value="Нет, не нравится"> Нет, не нравится</label>
+                    </div>
+                </div>
+
+                <!-- Вопрос 3: Удобство использования -->
+                <div class="form-group">
+                    <label>Удобно ли им пользоваться? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="usability" value="Очень удобно" required> Очень удобно</label>
+                        <label><input type="radio" name="usability" value="Удобно"> Удобно</label>
+                        <label><input type="radio" name="usability" value="Средне"> Средне</label>
+                        <label><input type="radio" name="usability" value="Не очень удобно"> Не очень удобно</label>
+                        <label><input type="radio" name="usability" value="Совсем неудобно"> Совсем неудобно</label>
+                    </div>
+                </div>
+
+                <!-- Вопрос 4: Скачивание ISO -->
+                <div class="form-group">
+                    <label>Скачивали ли вы ISO с этого сайта? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="downloaded" value="Да, скачивал(а)" required> Да, скачивал(а)</label>
+                        <label><input type="radio" name="downloaded" value="Нет, но планирую"> Нет, но планирую</label>
+                        <label><input type="radio" name="downloaded" value="Нет, не планирую"> Нет, не планирую</label>
+                        <label><input type="radio" name="downloaded" value="Пока не решил(а)"> Пока не решил(а)</label>
+                    </div>
+                </div>
+
+                <!-- Вопрос 5: Общая оценка проекта -->
+                <div class="form-group">
+                    <label>Нравится сам проект? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="project" value="Очень нравится" required> Очень нравится</label>
+                        <label><input type="radio" name="project" value="Нравится"> Нравится</label>
+                        <label><input type="radio" name="project" value="Нейтрально"> Нейтрально</label>
+                        <label><input type="radio" name="project" value="Не нравится"> Не нравится</label>
+                        <label><input type="radio" name="project" value="Совсем не нравится"> Совсем не нравится</label>
+                    </div>
+                </div>
+
+                <!-- Дополнительные комментарии -->
+                <div class="form-group">
+                    <label for="comments">Комментарии и пожелания</label>
+                    <textarea id="comments" name="comments" rows="4" placeholder="Напишите, что можно улучшить или добавить..."></textarea>
+                </div>
+
+                <button type="submit" class="btn">Отправить ответы</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Linux для людей. Сделано с ❤️ для друзей.</p>
+        </div>
+    </footer>
+
+    <script src="theme.js"></script>
+</body>
+</html>
