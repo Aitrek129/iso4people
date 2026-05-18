@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux для людей | Проект</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Дополнительные стили для лендинга */
+        .landing-section {
+            margin-bottom: 3rem;
+        }
+        .landing-section h2 {
+            color: var(--accent-light);
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--accent);
+            padding-left: 1rem;
+        }
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            border-color: var(--accent);
+        }
+        .card h3 {
+            margin-top: 0;
+            color: var(--accent-light);
+        }
+        .target-list {
+            list-style: none;
+            padding: 0;
+        }
+        .target-list li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .target-list li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent-light);
+        }
+        .btn-outline:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+        .perspective-text {
+            background: var(--bg-alt);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent);
+            margin: 1.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container nav-container">
+                <a href="index.html" class="logo">Linux для людей</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="download.html">Скачать</a></li>
+                    <li><a href="format.html">Форматирование</a></li>
+                    <li><a href="survey.html">Опрос</a></li>
+                    <li><a href="landing.html" class="active">О проекте</a></li>
+                    <li><button id="theme-switch" class="theme-toggle">🌙 Тёмная</button></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- Hero для лендинга -->
+            <section class="hero" style="background: linear-gradient(135deg, var(--bg-header), var(--bg-body));">
+                <h1>Сборки Linux, созданные <br> для реальных людей</h1>
+                <p>Кастомизированные ISO-образы под ваши задачи — от разработки до игр</p>
+                <div class="cta-buttons">
+                    <a href="download.html" class="btn">Смотреть сборки</a>
+                    <a href="survey.html" class="btn btn-outline">Оставить отзыв</a>
+                </div>
+            </section>
+
+            <!-- Актуальность -->
+            <section class="landing-section">
+                <h2>Актуальность</h2>
+                <div class="card">
+                    <p>В 2025 году Linux остаётся одной из самых востребованных платформ для серверов, разработки и встраиваемых систем. Однако для обычного пользователя установка и настройка дистрибутива часто превращается в квест: нужно выбрать версию, окружение рабочего стола, установить драйверы, настроить софт. Готовые сборки либо перегружены, либо, наоборот, не содержат необходимых инструментов. Проект «Linux для людей» решает эту проблему, предлагая готовые, персонализированные образы, которые можно скачать и сразу использовать.</p>
+                </div>
+            </section>
+
+            <!-- Проблема -->
+            <section class="landing-section">
+                <h2>Проблема</h2>
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>Сложность выбора</h3>
+                        <p>Новички теряются среди сотен дистрибутивов и версий. Что выбрать: Ubuntu, Fedora, Arch? А если нужно не только смотреть YouTube, но и программировать или играть?</p>
+                    </div>
+                    <div class="card">
+                        <h3>Отсутствие предустановленного ПО</h3>
+                        <p>Даже установив дистрибутив, пользователь тратит часы на доустановку драйверов, IDE, игровых клиентов, офисных пакетов.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Непонятные инструкции</h3>
+                        <p>Руководства по записи ISO и установке часто написаны техническим языком, пугают терминалом и командами dd.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Цель и задачи -->
+            <section class="landing-section">
+                <h2>Цель и задачи</h2>
+                <div class="card">
+                    <p><strong>Цель:</strong> создать набор готовых кастомных сборок Linux для разных категорий пользователей и предоставить простой веб-сайт для их скачивания с понятными инструкциями.</p>
+                    <p><strong>Задачи:</strong></p>
+                    <ul class="target-list">
+                        <li>Изучить инструменты кастомизации ISO (Cubic, debootstrap, Archiso).</li>
+                        <li>Собрать минимум три варианта: для разработки, для игр, для слабых ПК.</li>
+                        <li>Разработать статический сайт с тёмной/светлой темой и страницами загрузки, инструкцией и формой обратной связи.</li>
+                        <li>Протестировать сборки на реальных пользователях и собрать отзывы.</li>
+                        <li>Оценить возможность монетизации и дальнейшего развития.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Целевая аудитория -->
+            <section class="landing-section">
+                <h2>Целевая аудитория</h2>
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>🖥️ Начинающие пользователи</h3>
+                        <p>Люди, которые хотят попробовать Linux, но боятся сложностей. Им нужна сборка «из коробки» с привычным интерфейсом и основными программами.</p>
+                    </div>
+                    <div class="card">
+                        <h3>💻 Разработчики</h3>
+                        <p>Программисты, которым нужен готовый рабочий инструментарий: VS Code, Docker, Git, Node.js, Python, базы данных.</p>
+                    </div>
+                    <div class="card">
+                        <h3>🎮 Геймеры</h3>
+                        <p>Люди, которые хотят играть в Steam-игры и Windows-проекты через Proton/Wine без долгой настройки.</p>
+                    </div>
+                    <div class="card">
+                        <h3>🔄 Владельцы слабых ПК</h3>
+                        <p>Пользователи старого железа, которым нужно лёгкое окружение и минимальный набор приложений.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Перспективы развития -->
+            <section class="landing-section">
+                <h2>Перспективы развития</h2>
+                <div class="perspective-text">
+                    <p>✔️ <strong>Расширение библиотеки сборок</strong> — добавить образы для медиа-дизайна, кибербезопасности, образования.</p>
+                    <p>✔️ <strong>Автоматизация сборки</strong> — настроить GitHub Actions для генерации ISO по расписанию.</p>
+                    <p>✔️ <strong>Система отзывов и рейтингов</strong> — пользователи смогут голосовать за лучшие сборки.</p>
+                    <p>✔️ <strong>Монетизация</strong> — добровольные пожертвования, партнёрские ссылки на программы для записи ISO.</p>
+                    <p>✔️ <strong>Видеоинструкции</strong> — создание YouTube-канала с обзорами сборок и уроками по установке.</p>
+                    <p>✔️ <strong>Интеграция с облачными сервисами</strong> — возможность заказать флешку с готовой сборкой.</p>
+                </div>
+            </section>
+
+            <!-- Призыв к действию -->
+            <section class="landing-section" style="text-align: center;">
+                <h2>Готовы попробовать?</h2>
+                <p>Перейдите на страницу загрузки, выберите подходящую сборку и запишите её на флешку за 5 минут.</p>
+                <div class="cta-buttons">
+                    <a href="download.html" class="btn">Скачать ISO</a>
+                    <a href="format.html" class="btn btn-outline">Инструкция</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Linux для людей. Сделано с ❤️ для друзей.</p>
+        </div>
+    </footer>
+
+    <script src="theme.js"></script>
+    <script>
+        // Дополнительно обеспечим, чтобы кнопка темы работала
+        // (theme.js уже обрабатывает, но на всякий случай)
+        (function() {
+            const themeSwitch = document.getElementById('theme-switch');
+            if (themeSwitch && !window.themeInitialized) {
+                window.themeInitialized = true;
+                // theme.js сам всё сделает, если подключён
+            }
+        })();
+    </script>
+</body>
+</html>
